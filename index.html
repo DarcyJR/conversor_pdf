@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to Text</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+</head>
+<body>
+    <input type="file" id="pdfInput" accept=".pdf">
+    <button onclick="convertPDF()">Convert to Text</button>
+    <div id="output"></div>
+
+    <script>
+        async function convertPDF() {
+            const pdfInput = document.getElementById('pdfInput');
+            const file = pdfInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = async function(event) {
+                    const arrayBuffer = event.target.result;
+                    const pdfData = new Uint8Array(arrayBuffer);
+                    console.log(pdfData);
+                    // Carregar o PDF usando pdf.js
+                    const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+
+                    let text = '';
+
+                    // Iterar através das páginas e extrair texto
+                    for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                        const page = await pdf.getPage(pageNum);
+                        const content = await page.getTextContent();
+                        
+                        content.items.forEach(item => {
+                            text += item.str + ' ';
+                        });
+                    }
+
+                    // Exibir ou processar o texto como necessário
+                    document.getElementById('output').innerText = text;
+                };
+
+                reader.readAsArrayBuffer(file);
+            }
+        }
+    </script>
+</body>
+</html>

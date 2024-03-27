@@ -1,0 +1,30 @@
+{
+  "name": "pdftoimg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "ejs": "^3.1.9",
+    "exceljs": "^4.4.0",
+    "express": "^4.18.2",
+    "imagemagick-cli": "^0.5.0",
+    "mammoth": "^1.6.0",
+    "merge-pdf-buffers": "^1.0.3",
+    "pdf-lib": "^1.17.1",
+    "pdf-parse": "^1.1.1",
+    "pdf-poppler": "^0.2.1",
+    "tesseract.js": "^5.0.3",
+    "tesseract.js-core": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
